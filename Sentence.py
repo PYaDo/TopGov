@@ -1,9 +1,8 @@
-import pickle
 import spacy
 import re
 from config import config
 
-nlp = spacy.load(config['preprocessing']['TOKENIZER'])
+nlp = spacy.load(config['preprocessing']['tokenizer'])
 
 class Sentence:
     '''
@@ -40,22 +39,15 @@ class Sentence:
         return inventory
     
     def check_validity(self):
-        word_types = self.inventory.keys()
-        
-        if 'NOUN' in word_types \
-            and 'VERB' or 'AUX' in word_types \
-            and not re.match(r'\(cid:\d{1,4}\)', self.text):
-            #and not re.match(r'\(cid:\d{1,4}\)', self.text): \ #adidtional exclusions may be added later on here.
+
+        if 'NOUN' in self.inventory \
+                and ('VERB' in self.inventory or 'AUX' in self.inventory) \
+                and not re.search('\(cid:\d{1,4}\)', self.text):
             return True
+
         else:
             return False
-    
-    def summarize(self, show_token_details=False):
-        print(f'The sentence is:\n{self.text}')
-        print(f'The inventory holds:\n{self.inventory}')
-        if show_token_details:
-            print(f'The token details are:\n{self.tokens}')
-    
+        
     def get_details(self):
         # return self.text, self.tokens, self.inventory, self.is_valid 
         # as a dictionary for the sentence.        
