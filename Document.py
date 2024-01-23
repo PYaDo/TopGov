@@ -107,14 +107,18 @@ class Document():
         sentences = [sentence.text for sentence in self.sentences]
         return ' '.join(sentences)
     
-    def get_details(self):        
+    def get_details(self):
+        sentence_details = {}
+        for i, sentence in enumerate(self.sentences):
+            sentence_details[i] = sentence.get_details()
+
         result = {'base_path': self.base_path,
                   'title': self.title,
                   'file': self.file,
                   'is_valid': self.is_valid,
                   'raw_text': self.raw_text,
                   'raw_sentences': self.raw_sentences,
-                  'sentences': self.sentences
+                  'sentences': sentence_details
             }
         return result
     
