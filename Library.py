@@ -37,7 +37,9 @@ class Library:
                  verbose=False, 
                  path_to_serialized_data='/Users/paul/Documents/FOM/MasterArbeit/Thesis/dev/data/'):
         self.path = path
-    
+        self.verbose = verbose
+        self.path_to_serialized_data = path_to_serialized_data
+        
         self.no_entries = len(self.entries) == 0        
         if self.no_entries:
             self.library = database.parse_file(path, bib_format=format)
