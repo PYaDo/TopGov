@@ -1,3 +1,0 @@
-[filter "strip-notebook-output"]
-	clean = jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace %f
-	required
